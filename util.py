@@ -48,19 +48,10 @@ def vg_targets(pick_tl_x, pick_tl_y, pick_br_x, pick_br_y, place_x_ct, place_y_c
     segment = cloud[pick_tl_y: pick_br_y, pick_tl_x: pick_br_x]
     segment = floor_removal(segment)
     # Compute picking coordinates by compute mean of segmented objects
-    pick_x = segment[:, 0].mean() + 0.03  #+ 0.05
-    pick_y = segment[:, 1].mean() + 0.01  #- 0.09
-    pick_z = max(segment[:, 2].mean(), 0.02) #+ 0.03
+    pick_x = segment[:, 0].mean() + 0.03 
+    pick_y = segment[:, 1].mean() + 0.01 
+    pick_z = max(segment[:, 2].mean(), 0.02) 
     pick_target = [float(pick_x), float(pick_y), float(pick_z)]
-    # Is this useful? I'm not sure ...
-    '''
-    eigval, eigvec = PCA(segment)
-    z_axis = np.array([0., 0., 1.])
-    cond_pos = np.arccos(np.inner(eigvec, z_axis)) * 180. / np.pi
-    cond_neg = np.arccos(np.inner(eigvec, -z_axis)) * 180. / np.pi
-    if (cond_pos or cond_neg) and (eigval > 3.):
-        pick_target[2] += np.sqrt(eigval) * 1e-2
-    '''
     # Compute placement coordinate
     clean = clean.reshape(HEIGHT, WIDTH)
     h_min = max(int(place_y_ct - 15), 0)
@@ -68,9 +59,9 @@ def vg_targets(pick_tl_x, pick_tl_y, pick_br_x, pick_br_y, place_x_ct, place_y_c
     w_min = max(int(place_x_ct - 15), 0)
     w_max = min(int(place_x_ct + 15), 640)
     segment = cloud[h_min: h_max, w_min: w_max]
-    place_x = np.nanmean(segment['x']) + 0.03 # + 0.01
-    place_y = np.nanmean(segment['y']) + 0.04 # 0.035
-    place_z = max(float(pick_z), 0.02) # -0.01
+    place_x = np.nanmean(segment['x']) + 0.03 
+    place_y = np.nanmean(segment['y']) + 0.04 
+    place_z = max(float(pick_z), 0.02)
     place_target = [float(place_x), float(place_y), place_z]
     return pick_target, place_target
 

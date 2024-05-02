@@ -8,7 +8,7 @@ import base64
 import time
 from agent import Agent
 
-HOST = '147.47.200.155'
+HOST = '' # Host IP Address
 PORT = 9998
 
 def main():

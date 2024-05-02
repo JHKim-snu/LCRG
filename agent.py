@@ -71,11 +71,6 @@ class Agent:
 
 if __name__ == '__main__':
 
-    '''
-    Here I gonna write original VG pipeline & YOLO test in the script ...
-    '''
-    import math
-    import random
     rospy.init_node('vg_demo_test', anonymous=False, disable_signals=True)
     agent = Agent(test=False)
 

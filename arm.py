@@ -14,17 +14,10 @@ class Arm:
         moveit_commander.roscpp_initialize(sys.argv)
         self.arm_group = moveit_commander.MoveGroupCommander('arm')
         self.gripper_group = moveit_commander.MoveGroupCommander('gripper')
-        #self.arm_group.set_planner_id(planner_id)
-        #self.gripper_group.set_planner_id(planner_id)
         self.arm_group.set_workspace([0., -0.35, -0.02, 0.7, 0.35, 0.35])
-        #self.camera_pose = [-79.85, 50.77, 125.1, -52.05, -90.46, 21.79]
         self.camera_pose = [0., 50., 52., -93.26, -138.26, 90.]
         self.home_pose  = [0., -0.28, 1.309, 0., -1.047, 0.]
-        #self.home_pose = [0., 50., 135., 0., 0., 0.]
-        #self.ready_pose = [2.33, -17.73, 90.34, -87.56, -46.44, 90.]
         self.ready_pose = [0., 0., 90., -90., -70., 90.]
-        #self.ready_pose_alt = [22.5, -17.73, 90.34, -87.56, -46.44, 90.]
-        #self.ready_pose = [0, 5.72, 150.18, 89.55, -5.38, 90.]
         self.ready_pose_alt = [19.7, -29.5, 72.13, -88.64, -80.19, 103.47]
         self.new_ready_pose = [-98.44, 25.77, -127.56, 26.12, -74.25, -119.43] #[261.56, 25.77, 232.44, 26.12, 285.75, 240.57]
         self.camera_pose_alt = [90.0, -90.0, 0., 0., 0., 0.]
@@ -247,44 +240,6 @@ if __name__ == '__main__':
         arm.eef_orientation(*ori)
         print(arm.get_pose())
     arm.to_ready_pose()
-    '''
-    
-    '''
-    for k in range(8):
-        rot = np.random.uniform(-150, 150) / 180. * np.pi
-        arm.eef_orientation(rot)
-        print('{} done'.format(k))
-    '''
-    #arm.to_new_ready_pose()
-    #arm.to_ready_pose()
-    #arm.to_camera_pose_alt()
-    #arm.to_ready_pose()
-    #arm.to_camera_pose()
-    #print('test 2-3 boundary')
-    #arm.cartesian_target_default(0.35, -0.04, 0.05)
-
-    '''
-    print('test 3 section')
-    arm.cartesian_target_default(0.35, -0.2, 0.05)
-
-    print('test 4 section')
-    #arm.cartesian_target_quadrant4(0.5, -0.2, 0.03)
-    arm.cartesian_target_default(0.55, -0.2, 0.05)
-
-    #print('test 1-4 boundary')
-    #arm.cartesian_target_default(0.48, -0.04, 0.05)
-
-    # 0.48 & -0.04 is boundary !!
-    print('quadrant 2 tests')
-    arm.cartesian_target_default(0.35, 0.1, 0.05)
-
-    #arm.cartesian_target_quadrant2(0.47, 0., 0.03)
-    #arm.cartesian_target_quadrant2(0.26, 0.2, 0.03)
-    #arm.cartesian_target_quadrant2(0.35, 0.1, 0.03)
-    #arm.cartesian_target_quadrant2(0.28, 0.0, 0.03)
-    #arm.cartesian_target_quadrant2(0.45, 0.2, 0.03)
-    print('test 1 section')
-    arm.cartesian_target_default(0.55, 0.16, 0.05)
     '''
 
 

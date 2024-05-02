@@ -8,7 +8,7 @@ import base64
 import time
 from agent import Agent
 
-HOST = '147.47.200.155'
+HOST = '' # Host IP Address
 PORT = 9998
 
 def main():
@@ -21,7 +21,7 @@ def main():
     idx = 500
     rospy.loginfo('Clear Table to Get Placement Info')
     agent.arm.to_camera_pose()
-    raw_input('Press any key when table is clean ...')
+    input('Press any key when table is clean ...')
     clean_cloud = agent.camera.get_cloud()
     while not rospy.is_shutdown():
         try:
@@ -29,7 +29,7 @@ def main():
             rospy.loginfo('To Camera Pose')
             agent.arm.to_camera_pose()
             rospy.sleep(2.0)
-            raw_input('Place Things and Get Visual Info (Press any key)')
+            input('Place Things and Get Visual Info (Press any key)')
             # Take visual info and send image to the server
             cv_img = agent.camera.get_rgb()
             cloud = agent.camera.get_cloud()
@@ -40,7 +40,6 @@ def main():
             length = str(len(b64_data))
             cli_sock.sendall(length.encode('utf-8').ljust(64))
             cli_sock.sendall(b64_data)
-            # cli_sock.send(b64_data)
             rospy.loginfo('Wait for the server')
             # Receive bounding box Info
             data = cli_sock.recv(1024)
@@ -62,7 +61,7 @@ def main():
             agent.arm.to_ready_pose()
             agent.pick_n_place(TL_X, TL_Y, BR_X, BR_Y, PL_X, PL_Y, cloud, clean_cloud)
             idx += 1
-            value = raw_input('Continue? [y/n]')
+            value = input('Continue? [y/n]')
             if value != 'y': break
         except KeyboardInterrupt:
             print('\nClient Ctrl-c')
