@@ -1,2 +1,4 @@
 # LCRG
-A code for a robot (Kinova Gen3) for Language-Conditioned Robotic Grasping
+A code for a robot for Language-Conditioned Robotic Grasping. 
+
+We provide codes for UR5 and Kinova Gen3.
